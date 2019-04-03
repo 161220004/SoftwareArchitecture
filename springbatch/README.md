@@ -12,12 +12,21 @@
       private int qty;
       private String staffName;
       private Date date;
-      ...
+      ... // Get/Set
   }
   ```
 
 - 新增类 JsonWriter
   将 Report 类型对象列表按照格式写成 Json文件（保存于xml/outputs/report.json）
+  采用 Json 序列化库：Jackson
+
+  ```xml
+  <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.5.3</version>
+  </dependency>
+  ```
 
   ```java
   public class JsonWriter implements ItemWriter<Report> {
@@ -28,7 +37,7 @@
   	}
   	@Override
   	public void write(List<? extends Report> items) throws Exception {
-          ...
+          ... // Jackson
   	}
   }
   ```
@@ -54,8 +63,4 @@
   ```
 
 
-
-最终结果（report.json）
-
-![README](README.png)
 

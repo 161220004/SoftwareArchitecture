@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.batch.item.ItemWriter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class JsonWriter implements ItemWriter<Report> {
 	// file system resource
 	private String resource;
@@ -18,6 +20,10 @@ public class JsonWriter implements ItemWriter<Report> {
 	@Override
 	public void write(List<? extends Report> items) throws Exception {
 		FileWriter writer = new FileWriter(new File(resource));
+		// Jackson的Json序列化
+		ObjectMapper mapper = new ObjectMapper();
+		writer.write(mapper.writeValueAsString(items));
+		/* 手动Json序列化
 		writer.write("{\n\t\"records\": [\n");
 		boolean isHead = true;
 		for (Report item: items) {
@@ -36,6 +42,7 @@ public class JsonWriter implements ItemWriter<Report> {
 			writer.write("\t}");
 		}
 		writer.write("\n  ]\n}\n");
+		*/
 		writer.close();
 	}
 
