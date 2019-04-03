@@ -2,12 +2,11 @@ package cn.edu.nju.sa2017.pipefilter;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.batch.item.ItemWriter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 public class JsonWriter implements ItemWriter<Report> {
 	// file system resource
@@ -20,9 +19,13 @@ public class JsonWriter implements ItemWriter<Report> {
 	@Override
 	public void write(List<? extends Report> items) throws Exception {
 		FileWriter writer = new FileWriter(new File(resource));
-		// Jackson的Json序列化
+		// Gson的Json序列化
+		Gson gson = new Gson();
+		writer.write(gson.toJson(items));
+		/* Jackson的Json序列化
 		ObjectMapper mapper = new ObjectMapper();
 		writer.write(mapper.writeValueAsString(items));
+		*/
 		/* 手动Json序列化
 		writer.write("{\n\t\"records\": [\n");
 		boolean isHead = true;

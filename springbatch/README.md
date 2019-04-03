@@ -18,13 +18,13 @@
 
 - 新增类 JsonWriter
   将 Report 类型对象列表按照格式写成 Json文件（保存于xml/outputs/report.json）
-  采用 Json 序列化库：Jackson
+  采用 Json 序列化库：Gson
 
   ```xml
   <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.5.3</version>
+  	<groupId>com.google.code.gson</groupId>
+  	<artifactId>gson</artifactId>
+  	<version>2.8.5</version>
   </dependency>
   ```
 
@@ -37,7 +37,7 @@
   	}
   	@Override
   	public void write(List<? extends Report> items) throws Exception {
-          ... // Jackson
+          ... 
   	}
   }
   ```
